@@ -16,7 +16,7 @@ const DedicateModal = ({ isOpen, onClose }: ModalProperties) => {
           className="absolute top-0 right-0 p-4 cursor-pointer"
           onClick={onClose}
         >
-          &times;
+          X
         </span>
         <div className="px-5 py-4 text-black">
           <h2 className="text-2xl font-bold mb-4">Dedicate this song</h2>
