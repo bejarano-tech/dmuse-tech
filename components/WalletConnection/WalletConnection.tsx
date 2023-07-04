@@ -15,7 +15,7 @@ export const WalletConnection = () => {
     return (
       <button
         onClick={() => disconnect()}
-        className="bg-yellow-500 text-black font-bold rounded px-4 py-2 focus:outline-none"
+        className="bg-black border border-yellow-500 text-white font-bold rounded px-4 py-2 focus:outline-none"
       >
         Disconnect
       </button>
