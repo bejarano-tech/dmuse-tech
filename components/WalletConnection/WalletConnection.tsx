@@ -10,11 +10,18 @@ export const WalletConnection = () => {
   const handleConnect = (walletName: string) => {
     connect(walletName)
   }
+  
+  const handleDisconnect = () => {
+    setIsOpen(false)
+    disconnect()
+  }
+
+
 
   if(account){
     return (
       <button
-        onClick={() => disconnect()}
+        onClick={() => handleDisconnect()}
         className="bg-black border border-yellow-500 text-white font-bold rounded px-4 py-2 focus:outline-none"
       >
         Disconnect
@@ -25,7 +32,7 @@ export const WalletConnection = () => {
   return (
     <div className="relative inline-block">
       <button
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={() => setIsOpen(true)}
         className="bg-yellow-500 text-black font-bold rounded px-4 py-2 focus:outline-none"
       >
         Connect Wallet
@@ -33,7 +40,7 @@ export const WalletConnection = () => {
 
       {isOpen && (
         <div
-          className="absolute flex flex-col left-0 mt-2 py-2 w-48 bg-black rounded shadow-xl"
+          className="absolute flex flex-col left-0 mt-2 py-2 w-48 bg-black rounded shadow-xl z-10"
         >
           {wallets.map((w, index) => {
             return (

@@ -6,8 +6,9 @@ import Image from 'next/image'
 export default function Home() {
   const songs = Array.from({ length: 12 }, (_, i) => ({
     id: i,
-    name: `Song ${i + 1}`,
+    name: `Song Name ${i + 1}`,
     image: `https://random.imagecdn.app/328/261?w=3840&q=75`,
+    artist: `Artist Name ${i + 1}`
   }));
 
   return (
@@ -43,11 +44,11 @@ export default function Home() {
           className="lg:w-2/3 lg:pr-4 pb-4 lg:pb-0"
           style={{ maxHeight: "calc(100vh - 4rem)" }}
         >
-          <div className="grid lg:grid-cols-3 gap-10">
+          <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-10">
             {songs.map((song) => (
               <div
                 key={song.id}
-                className="relative text-center p-3 w-full h-full border border-white"
+                className="relative text-center p-3 w-full h-full border border-white rounded"
               >
                 <div className="relative group">
                   <div
@@ -64,7 +65,12 @@ export default function Home() {
                     height={256}
                   />
                 </div>
-                <p className='my-8'>{song.name}</p>
+                <p className='mt-4'>{song.name}</p>
+                <p className='mb-2'>{song.artist}</p>
+                <div className='mx-auto  p-1 rounded flex justify-center items-center mb-4 w-1/2 border border-white'>
+                  <Image src="/clap-white.svg" alt="claps" width={30} height={30} />
+                  <p className='ml-2'>300</p>
+                </div>
                 <div className='flex flex-col items-center'>
                   <DedicateButton />
                   <ClapButton />
