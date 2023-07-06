@@ -15,12 +15,12 @@ const SongCard = ({ song }: SongCardProps) => {
         className="relative text-center p-3 w-full h-full border border-white rounded"
       >
         <div className="relative group">
-          <div
+          <button
             className="absolute inset-0 bg-cover bg-center opacity-0 group-hover:opacity-100 transition-opacity"
             style={{
-              backgroundImage: `url('https://via.placeholder.com/256')`,
+              backgroundImage: `url('/play.svg')`,
             }}
-          ></div>
+          ></button>
           <Image
             src={song.image}
             alt={song.name}

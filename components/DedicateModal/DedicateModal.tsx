@@ -61,15 +61,10 @@ const DedicateModal = ({ isOpen, onClose }: ModalProperties) => {
             <input
               className="border rounded w-full py-2 px-3 text-black mb-4"
               name="name"
-              placeholder="Enter your email"
-            />
-            <input
-              className="border rounded w-full py-2 px-3 text-black mb-4"
-              name="name"
-              placeholder="Enter the email of your fellow"
+              placeholder="Wallet Address of your fellow"
             />
             <p className="mb-4 text-white">Mint this NFT Dedicated Song and give away to your fellows.</p>
-            <button className="bg-yellow-500 w-full text-black hover:bg-yellow-700 font-bold py-2 px-4 rounded">
+            <button onClick={() => setStep(2)} className="bg-yellow-500 w-full text-black hover:bg-yellow-700 font-bold py-2 px-4 rounded">
               Next
             </button>
             </div>
@@ -78,21 +73,27 @@ const DedicateModal = ({ isOpen, onClose }: ModalProperties) => {
         {
           step === 2 ?
             <div className="px-5 py-4 text-white">
-            <h2 className="text-2xl font-bold mb-4">Transfer it to your fellow</h2>
-            <input
-              className="border rounded w-full py-2 px-3 text-black mb-4"
-              name="name"
-              placeholder="Enter your email"
-            />
-            <input
-              className="border rounded w-full py-2 px-3 text-black mb-4"
-              name="name"
-              placeholder="Enter the email of your fellow"
-            />
-            <p className="mb-4 text-white">Mint this NFT Dedicated Song and give away to your fellows.</p>
-            <button className="bg-yellow-500 w-full text-black hover:bg-yellow-700 font-bold py-2 px-4 rounded">
+            <h2 className="text-2xl font-bold mb-4">This is how it looks</h2>
+            <h3>The song:</h3>
+            <p>Song 1</p>
+            <h3>From artist:</h3>
+            <p>Artist 1</p>
+            <h3>Is going to be minted in this wallet:</h3>
+            <p>Wallet Address</p>
+            <h3>With this dedicatory</h3>
+            <p>Dedicatory of example, i remeber this song ...</p>
+            <p className="mb-4 mt-16 text-white">This operation doesn`t have reverse, are you sure the data is Ok?</p>
+            <button onClick={() => setStep(3)} className="bg-yellow-500 w-full text-black hover:bg-yellow-700 font-bold py-2 px-4 rounded">
               Next
             </button>
+            </div>
+          : null
+        }
+        {
+          step === 3 ?
+            <div className="px-5 py-4 text-white">
+            <h2 className="text-2xl font-bold mb-4">Song Dedicated</h2>
+            <h3>The song was sended as an NFT</h3>
             </div>
           : null
         }
