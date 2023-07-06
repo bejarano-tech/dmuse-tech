@@ -1,13 +1,17 @@
+"use client"
 import Image from "next/image";
 import { Song } from "../SongsList/SongsList";
 import DedicateButton from "../DedicateButton";
 import ClapButton from "../ClapButton";
+import useMediaQueries from "@/hooks/useMediaQueries";
 
 interface SongCardProps {
   song: Song;
 }
 
 const SongCard = ({ song }: SongCardProps) => {
+  const { isDesktop } = useMediaQueries()
+
   return (
     <>
       <div
@@ -16,7 +20,7 @@ const SongCard = ({ song }: SongCardProps) => {
       >
         <div className="relative group">
           <button
-            className="absolute inset-0 bg-cover bg-center opacity-0 group-hover:opacity-100 transition-opacity"
+            className={`absolute inset-0 bg-cover bg-center ${isDesktop ? 'opacity-0 group-hover:opacity-100 transition-opacity' : '' }`}
             style={{
               backgroundImage: `url('/play.svg')`,
             }}
