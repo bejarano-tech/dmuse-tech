@@ -20,7 +20,7 @@ const SongCard = ({ song }: SongCardProps) => {
       >
         <div className="relative group">
           <button
-            className={`absolute inset-0 bg-cover bg-center ${isDesktop ? 'opacity-0 group-hover:opacity-100 transition-opacity' : '' }`}
+            className={`absolute inset-0 bg-cover bg-center ${!isDesktop ? 'opacity-0 group-hover:opacity-100 transition-opacity' : '' }`}
             style={{
               backgroundImage: `url('/play.svg')`,
             }}
