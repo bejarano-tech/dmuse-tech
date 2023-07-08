@@ -37,6 +37,21 @@ where
     
         Ok(())
     }
+
+    /// Withdraws funds to contract owner
+    #[modifiers(only_owner)]
+    default fn withdraw(&mut self) -> Result<(), PSP34Error> {
+        let balance = Self::env().balance();
+        let current_balance = balance
+            .checked_sub(Self::env().minimum_balance())
+            .unwrap_or_default();
+        Self::env()
+            .transfer(self.data::<ownable::Data>().owner(), current_balance)
+            .map_err(|_| {
+                PSP34Error::Custom(String::from(Shiden34Error::WithdrawalFailed.as_str()))
+            })?;
+        Ok(())
+    }
 }
 
 pub trait Internal {
