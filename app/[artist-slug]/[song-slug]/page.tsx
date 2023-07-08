@@ -1,5 +1,4 @@
-export default function Song(p) {
-  console.log(p)
+export default function Song() {
   return (
     <div className="font-sans">
     </div>

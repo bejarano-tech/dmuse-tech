@@ -1,5 +1,4 @@
-export default function DedicateSong(p) {
-  console.log(p)
+export default function DedicateSong() {
   return (
     <div className="font-sans">
     </div>
