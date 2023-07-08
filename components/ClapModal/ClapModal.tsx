@@ -1,4 +1,5 @@
 "use client"
+import cn from 'classnames'
 import Image from 'next/image'
 import { useState } from 'react'
 interface ModalProperties {
@@ -49,7 +50,7 @@ const ClapModal = ({ isOpen, onClose }: ModalProperties) => {
               placeholder="Enter the amount of claps to send"
             />
             <p className='text-white mb-4'>{claps ? claps : '0'} clap{claps > 0 ? 's' : ''} = {claps ? claps * 0.5 : '0'} TZERO</p>
-            <button disabled={!(claps > 0)} className={`w-full bg-yellow-${claps > 0 ? '500' : '700'} ${claps > 0 ? 'hover:bg-yellow-700' : ''} text-black font-bold py-2 px-4 rounded`}>
+            <button disabled={!(claps > 0)} className={cn('w-full text-black font-bold py-2 px-4 rounded', {'bg-yellow-700': claps == 0}, {'bg-yellow-500 hover:bg-yellow-700': claps > 0})}>
               Send Claps
             </button>
           </div>

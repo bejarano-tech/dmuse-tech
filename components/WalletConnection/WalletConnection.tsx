@@ -32,7 +32,7 @@ export const WalletConnection = () => {
   return (
     <div className="relative inline-block">
       <button
-        onClick={() => setIsOpen(true)}
+        onClick={() => setIsOpen(!isOpen)}
         className="bg-yellow-500 text-black font-bold rounded px-4 py-2 focus:outline-none"
       >
         Connect Wallet

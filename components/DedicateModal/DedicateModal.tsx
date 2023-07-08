@@ -57,13 +57,18 @@ const DedicateModal = ({ isOpen, onClose }: ModalProperties) => {
         {
           step === 1 ?
             <div className="px-5 py-4 text-white">
-            <h2 className="text-2xl font-bold mb-4">Transfer it to your fellow</h2>
+            <h2 className="text-2xl font-bold mb-4">Tell us about your honoree</h2>
             <input
               className="border rounded w-full py-2 px-3 text-black mb-4"
               name="name"
               placeholder="Wallet Address of your fellow"
             />
-            <p className="mb-4 text-white">Mint this NFT Dedicated Song and give away to your fellows.</p>
+            <input
+              className="border rounded w-full py-2 px-3 text-black mb-4"
+              name="name"
+              placeholder="Email Address of your fellow"
+            />
+            <p className="mb-4 text-white">This will ensure that the honoree is going to know about your dedication.</p>
             <button onClick={() => setStep(2)} className="bg-yellow-500 w-full text-black hover:bg-yellow-700 font-bold py-2 px-4 rounded">
               Next
             </button>
