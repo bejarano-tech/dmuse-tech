@@ -219,6 +219,7 @@ dependencies = [
  "ink",
  "openbrush",
  "parity-scale-codec",
+ "payable_mint_pkg",
  "scale-info",
 ]
 
@@ -772,6 +773,16 @@ name = "paste"
 version = "1.0.13"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "b4b27ab7be369122c218afc2079489cdcb4b517c0a3fc386ff11e1fedfcc2b35"
+
+[[package]]
+name = "payable_mint_pkg"
+version = "3.0.0"
+dependencies = [
+ "ink",
+ "openbrush",
+ "parity-scale-codec",
+ "scale-info",
+]
 
 [[package]]
 name = "pest"

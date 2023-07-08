@@ -3,6 +3,7 @@
 
 #[openbrush::contract]
 pub mod dmuseminter {
+    use payable_mint_pkg::traits::payable_mint::*;
     use openbrush::{
         contracts::psp34::extensions::{
             enumerable::*,
@@ -39,6 +40,7 @@ pub mod dmuseminter {
     }
     impl PSP34Enumerable for DMuseMinter {}
     impl PSP34Metadata for DMuseMinter {}
+    impl PayableMint for DMuseMinter {}
 
     impl DMuseMinter {
         #[ink(constructor)]
@@ -50,14 +52,6 @@ pub mod dmuseminter {
             instance._set_attribute(collection_id.clone(), String::from("name"), String::from("DMuseMinter"));
             instance._set_attribute(collection_id, String::from("symbol"), String::from("DMM"));
             instance
-        }
-
-        #[ink(message, payable)]
-        pub fn mint(&mut self, account: AccountId, id: Id) -> Result<(), PSP34Error> {
-            if Self::env().transferred_value() != 1_000_000_000_000_000_000 {
-                return Err(PSP34Error::Custom(String::from("BadMintValue")))
-            }
-            self._mint_to(account, id)
         }
     }
 }
