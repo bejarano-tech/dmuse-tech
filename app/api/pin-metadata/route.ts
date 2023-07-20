@@ -8,6 +8,5 @@ import { NextResponse } from 'next/server'
 export async function POST(request: Request) {
   const body = await request.json()
   const uploadToIpfs = await pinata.pinJSONToIPFS(body)
-  console.log(uploadToIpfs)
-  return NextResponse.json({body})
+  return NextResponse.json(uploadToIpfs)
 }

@@ -2,7 +2,7 @@
 import { UseInkProvider } from "useink";
 import "./globals.css";
 import { Inter } from "next/font/google";
-import { RococoContractsTestnet, ShibuyaTestnet } from "useink/chains";
+import { AlephTestnet, RococoContractsTestnet, ShibuyaTestnet } from "useink/chains";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,7 +17,7 @@ export default function RootLayout({
         <UseInkProvider
           config={{
             dappName: "DMuse",
-            chains: [RococoContractsTestnet, ShibuyaTestnet],
+            chains: [AlephTestnet],
           }}
         >
           {children}

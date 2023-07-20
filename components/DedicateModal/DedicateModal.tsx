@@ -1,6 +1,17 @@
 import { SongItem } from '@/data/songs';
+import metadata from '../../target/ink/dmuseminter/dmuseminter.json'
+import { ApiPromise, Keyring, WsProvider } from '@polkadot/api';
+import { ContractPromise } from '@polkadot/api-contract';
 import Image from 'next/image'
 import { useState } from 'react';
+import { useWallet } from 'useink';
+import { BN, stringCamelCase } from '@polkadot/util';
+import { getAbiMessage } from '@/helpers/getAbiMessage';
+// Store your contract's ABI
+const CONTRACT_ABI = metadata;
+// Store contract address
+const CONTRACT_ADDRESS = '5HaaRi9XvrfT1Y1uztJK2vfnLUsJ6P1Q8aF2hGBW17rHoYr6'
+
 
 interface ModalProperties {
   isOpen: boolean
@@ -13,6 +24,8 @@ const DedicateModal = ({ isOpen, onClose, song }: ModalProperties) => {
   const [dedicatory, setDedicatory] = useState('')
   const [walletAddress, setWalletAddress] = useState('')
   const [songMetadata, setSongMetadata] = useState<SongItem | undefined>(song)
+  const { account, getWalletBySource } = useWallet();
+  const keyring = new Keyring({ type: 'sr25519' });
 
   if (!isOpen) {
     return null;
@@ -42,7 +55,59 @@ const DedicateModal = ({ isOpen, onClose, song }: ModalProperties) => {
       method: 'POST',
       body: JSON.stringify(songMetadata)
     })
-    console.log(response)
+    const { IpfsHash } = await response.json();
+    const base_uri = `https://gateway.pinata.cloud/ipfs/${IpfsHash}`
+    console.log(base_uri)
+
+    const wsProvider = new WsProvider("wss://ws.test.azero.dev/");
+    const api = await ApiPromise.create({ provider: wsProvider });
+    const contract = new ContractPromise(api, CONTRACT_ABI, CONTRACT_ADDRESS);
+    // @ts-ignore
+    const maximumBlockWeight = api.consts.system.blockWeights.maxBlock as unknown as WeightV2
+    const maxGas = maximumBlockWeight.refTime.toNumber() * 0.9
+    const gl = api.registry.createType('WeightV2', {
+        refTime: maxGas,
+        proofSize: maxGas,
+    // @ts-ignore
+    }) as WeightV2
+
+    const totalSuppy = await contract.query['psp34::totalSupply'](account.address, { gasLimit: gl })
+    .then((res) => {
+      // @ts-ignore
+      if (!res?.result?.toHuman()?.Err) return res.output.toHuman().Ok;
+    });
+
+    const alice = keyring.addFromUri('//Alice', { name: 'Alice default' });
+
+    const abiMessage = contract.abi.messages.find(
+      (m) => stringCamelCase(m.method) === stringCamelCase('mint'),
+    )
+    const result = await api.call.contractsApi.call(
+      account.address,
+      CONTRACT_ADDRESS,
+      new BN(0),
+      null,
+      null,
+      abiMessage?.toU8a([account.address, {u8: totalSuppy}, base_uri]))
+    const gasLimit = result.gasRequired
+    const mint = await contract.tx.
+                                  mint({ gasLimit }, account.address, {u8: totalSuppy}, base_uri)
+                                  .signAndSend(alice, async ({status, events, dispatchError}) => {
+                                    // status would still be set, but in the case of error we can shortcut
+                                    // to just check it (so an error would indicate InBlock or Finalized)
+                                    if (dispatchError) {
+                                      if (dispatchError.isModule) {
+                                        // for module errors, we have the section indexed, lookup
+                                        const decoded = api.registry.findMetaError(dispatchError.asModule);
+                                        const { docs, name, section } = decoded;
+
+                                        console.log(`${section}.${name}: ${docs.join(' ')}`);
+                                      } else {
+                                        // Other, CannotLookup, BadOrigin, no extra info
+                                        console.log(dispatchError.toString());
+                                      }
+                                    }
+                                  })
   }
 
   return (
