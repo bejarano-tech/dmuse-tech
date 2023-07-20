@@ -3,15 +3,9 @@ import DedicateButton from '@/components/DedicateButton';
 import SongsList from '@/components/SongsList';
 import WalletConnection from '@/components/WalletConnection';
 import Image from 'next/image'
+import { songs } from '@/data/songs'
 
 export default function Home() {
-  const songs = Array.from({ length: 12 }, (_, i) => ({
-    id: i,
-    name: `Song Name ${i + 1}`,
-    image: `https://random.imagecdn.app/328/261?w=3840&q=75`,
-    artist: `Artist Name ${i + 1}`
-  }));
-
   return (
     <div className="font-sans">
       <header className="p-4 flex justify-start">

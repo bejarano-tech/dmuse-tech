@@ -3,7 +3,8 @@
 
 #[openbrush::contract]
 pub mod dmuseminter {
-    use payable_mint_pkg::traits::payable_mint::*;
+    use ink::storage::Mapping;
+
     use openbrush::{
         contracts::psp34::extensions::{
             enumerable::*,
@@ -23,6 +24,7 @@ pub mod dmuseminter {
         ownable: ownable::Data,
         #[storage_field]
         metadata: metadata::Data,
+        base_uris: ink::storage::Mapping<Id, String>,
     }
 
     impl PSP34 for DMuseMinter {}
@@ -40,18 +42,32 @@ pub mod dmuseminter {
     }
     impl PSP34Enumerable for DMuseMinter {}
     impl PSP34Metadata for DMuseMinter {}
-    impl PayableMint for DMuseMinter {}
 
     impl DMuseMinter {
         #[ink(constructor)]
         pub fn new() -> Self {
+            let base_uris = Mapping::default();
             let mut instance = Self::default();
             instance._init_with_owner(instance.env().caller());
-            instance._mint_to(instance.env().caller(), Id::U8(1)).expect("Can't mint");
             let collection_id = instance.collection_id();
             instance._set_attribute(collection_id.clone(), String::from("name"), String::from("DMuseMinter"));
             instance._set_attribute(collection_id, String::from("symbol"), String::from("DMM"));
-            instance
+            Self { base_uris, metadata: instance.metadata, ownable: instance.ownable, psp34: instance.psp34 }
+        }
+
+        #[ink(message)]
+        pub fn mint(&mut self, account: AccountId, id: Id, base_uri: String) -> Result<(), PSP34Error> {
+            // if Self::env().transferred_value() != 1_000 {
+            //     return Err(PSP34Error::Custom(String::from("BadMintValue")));
+            // }
+            self.base_uris.insert(&id, &base_uri);
+            self._mint_to(account, id)
+        }
+
+        #[ink(message)]
+        pub fn token_uri(&self, id: Id) -> Result<String, PSP34Error> {
+            let token_uri = self.base_uris.get(id).unwrap_or_default();
+            Ok(token_uri)
         }
     }
 }

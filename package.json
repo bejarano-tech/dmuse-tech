@@ -9,6 +9,10 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@polkadot/api": "^10.9.1",
+    "@polkadot/api-contract": "^10.9.1",
+    "@polkadot/util": "^12.3.2",
+    "@scio-labs/use-inkathon": "^0.0.1-alpha.51",
     "@types/node": "20.3.3",
     "@types/react": "18.2.14",
     "@types/react-dom": "18.2.6",

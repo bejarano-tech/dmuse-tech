@@ -12,8 +12,6 @@ scale-info = { version = "2.3", default-features = false, features = ["derive"],
 
 openbrush = { tag = "3.0.0", git = "https://github.com/727-Ventures/openbrush-contracts", default-features = false, features = ["psp34", "ownable"] }
 
-payable_mint_pkg = { path = "../../logics", default-features = false }
-
 [lib]
 path = "lib.rs"
 
@@ -25,6 +23,5 @@ std = [
     "scale-info/std",
 
     "openbrush/std",
-    "payable_mint_pkg/std",
 ]
 ink-as-dependency = []

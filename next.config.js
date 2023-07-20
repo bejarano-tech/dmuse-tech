@@ -12,6 +12,11 @@ const nextConfig = {
         hostname: 'via.placeholder.com',
         port: '',
       },
+      {
+        protocol: 'https',
+        hostname: 'gateway.pinata.cloud',
+        port: '',
+      },
     ],
   },
 }
