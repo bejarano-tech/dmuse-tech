@@ -1,12 +1,12 @@
 "use client"
 import Image from "next/image";
-import { Song } from "../SongsList/SongsList";
 import DedicateButton from "../DedicateButton";
 import ClapButton from "../ClapButton";
 import useMediaQueries from "@/hooks/useMediaQueries";
+import { SongItem } from "@/data/songs";
 
 interface SongCardProps {
-  song: Song;
+  song: SongItem;
 }
 
 const SongCard = ({ song }: SongCardProps) => {
@@ -34,13 +34,13 @@ const SongCard = ({ song }: SongCardProps) => {
           />
         </div>
         <p className="mt-4">{song.name}</p>
-        <p className="mb-2">{song.artist}</p>
+        <p className="mb-2">Artist</p>
         <div className="mx-auto  p-1 rounded flex justify-center items-center mb-4 w-1/2 border border-white">
           <Image src="/clap-white.svg" alt="claps" width={30} height={30} />
           <p className="ml-2">300</p>
         </div>
         <div className="flex flex-col items-center">
-          <DedicateButton />
+          <DedicateButton song={song} />
           <ClapButton />
         </div>
       </div>

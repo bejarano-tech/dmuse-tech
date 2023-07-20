@@ -3,8 +3,13 @@
 import { useState } from "react"
 import DedicateModal from "../DedicateModal"
 import { useWallet } from "useink"
+import { SongItem } from "@/data/songs"
 
-const DedicateButton = () => {
+interface DedicateButtonPros {
+  song: SongItem
+}
+
+const DedicateButton = ({ song }: DedicateButtonPros) => {
   const  [isOpen, setIsOpen] = useState(false)
   const { account } = useWallet()
   return (
@@ -19,6 +24,7 @@ const DedicateButton = () => {
           </button>
           <DedicateModal
             isOpen={isOpen}
+            song={song}
             onClose={async () => setIsOpen(false)}
           />
         </>

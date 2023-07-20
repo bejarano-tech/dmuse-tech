@@ -1,11 +1,13 @@
+import { SongItem } from '@/data/songs';
 import Image from 'next/image'
 import { useState } from 'react';
 interface ModalProperties {
   isOpen: boolean
   onClose: () => {}
+  song: SongItem
 }
 
-const DedicateModal = ({ isOpen, onClose }: ModalProperties) => {
+const DedicateModal = ({ isOpen, onClose, song }: ModalProperties) => {
   const [step, setStep] = useState(0);
   if (!isOpen) {
     return null;
@@ -32,14 +34,14 @@ const DedicateModal = ({ isOpen, onClose }: ModalProperties) => {
             <div className='flex justify-center'>
               <Image
                 className="mb-4"
-                src="https://via.placeholder.com/75"
-                alt="Placeholder"
+                src={song.image}
+                alt={song.name}
                 width={75}
                 height={75}
               />
               <div className='flex flex-col ml-4 mt-2'>
-                <p className='uppercase text-left'>Artist Name</p>
-                <p className='text-left'>Song Name</p>
+                <p className='uppercase text-left'>Fermata</p>
+                <p className='text-left'>{song.name}</p>
               </div>
             </div>
             <textarea
