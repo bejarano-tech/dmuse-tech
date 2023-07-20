@@ -1,14 +1,8 @@
+import { SongItem } from '@/data/songs';
 import SongCard from '../SongCard';
 
-export interface Song {
-  id: number;
-  name: string;
-  image: string;
-  artist: string;
-}
-
 interface SongsListProps {
-  songs: Array<Song>
+  songs: Array<SongItem>
 }
 
 const SongsList = ({songs}: SongsListProps) => {
