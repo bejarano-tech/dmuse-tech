@@ -1,6 +1,8 @@
 "use client";
+// @ts-ignore
 import { ApiPromise, WsProvider } from '@polkadot/api';
 import metadata from '../../target/ink/dmuseminter/dmuseminter.json'
+// @ts-ignore
 import { ContractPromise } from '@polkadot/api-contract';
 import { useWallet } from 'useink';
 
