@@ -23,10 +23,10 @@ export const songs: SongItem[] = [
     attributes: [{trait_type: "artist", value: "Popilopi"}]
   },
   {
-    description: "Buenas noticias - Song by L.L.D",
-    external_url: "https://scarlet-brilliant-roundworm-590.mypinata.cloud/ipfs/QmePtaWQdj3KJMVDQv3w4sBMTpVhJX1V2tmZjnWVQirG7K/buenas-noticias.wav",
-    image: "https://scarlet-brilliant-roundworm-590.mypinata.cloud/ipfs/QmePtaWQdj3KJMVDQv3w4sBMTpVhJX1V2tmZjnWVQirG7K/buenas-noticias.png",
-    name: "Buenas noticias",
+    description: "Tu Pañuelo - Song by L.L.D",
+    external_url: "https://scarlet-brilliant-roundworm-590.mypinata.cloud/ipfs/QmePtaWQdj3KJMVDQv3w4sBMTpVhJX1V2tmZjnWVQirG7K/tu-panuelo.wav",
+    image: "https://scarlet-brilliant-roundworm-590.mypinata.cloud/ipfs/QmePtaWQdj3KJMVDQv3w4sBMTpVhJX1V2tmZjnWVQirG7K/tu-panuelo.png",
+    name: "Tu Pañuelo",
     attributes: [{trait_type: "artist", value: "L.L.D"}]
   },
   {
@@ -58,10 +58,10 @@ export const songs: SongItem[] = [
     attributes: [{trait_type: "artist", value: "L.L.D"}]
   },
   {
-    description: "Tu Pañuelo - Song by L.L.D",
-    external_url: "https://scarlet-brilliant-roundworm-590.mypinata.cloud/ipfs/QmePtaWQdj3KJMVDQv3w4sBMTpVhJX1V2tmZjnWVQirG7K/tu-panuelo.wav",
-    image: "https://scarlet-brilliant-roundworm-590.mypinata.cloud/ipfs/QmePtaWQdj3KJMVDQv3w4sBMTpVhJX1V2tmZjnWVQirG7K/tu-panuelo.png",
-    name: "Tu Pañuelo",
+    description: "Buenas noticias - Song by L.L.D",
+    external_url: "https://scarlet-brilliant-roundworm-590.mypinata.cloud/ipfs/QmePtaWQdj3KJMVDQv3w4sBMTpVhJX1V2tmZjnWVQirG7K/buenas-noticias.wav",
+    image: "https://scarlet-brilliant-roundworm-590.mypinata.cloud/ipfs/QmePtaWQdj3KJMVDQv3w4sBMTpVhJX1V2tmZjnWVQirG7K/buenas-noticias.png",
+    name: "Buenas noticias",
     attributes: [{trait_type: "artist", value: "L.L.D"}]
-  },
+  }
 ]
