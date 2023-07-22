@@ -10,7 +10,10 @@ const Header = () => {
       <Link href="/">
         <Image alt="Logo" src="/dmuse.svg" height={40} width={100} />
       </Link>
-      {account ? <Link href="/dedications">My Dedications</Link> : null}
+      <div className="flex">
+        {account ? <Link className="mb-8 text-white border border-yellow-500 font-bold rounded px-4 py-2 focus:outline-none mr-8" href="/dedications">My Dedications</Link> : null}
+        <p className="mt-0">Aleph Zero Testnet</p>
+      </div>
     </header>
   );
 };

@@ -32,7 +32,6 @@ export default function Home() {
           <div className="text-center mb-16">
             <div className="mb-16">
               <WalletConnection />
-              <p className='mt-8'>Aleph Zero Testnet</p>
             </div>
             { !account ? 
               <p className="text-sm">
