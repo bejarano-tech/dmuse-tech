@@ -36,7 +36,7 @@ Before running the project, ensure you have the following prerequisites:
 
 ```bash
 git clone 
-cd dmuse
+cd dmuse-tech
 ```
 
 2. Install the dependencies for both the smart contracts and the frontend:
