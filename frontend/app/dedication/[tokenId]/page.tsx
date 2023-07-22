@@ -64,12 +64,6 @@ export default function Dedication({
 
   return (
     <>
-      <header className="p-4 flex justify-start">
-        <Link href="/">
-          <Image alt='Logo' src="/dmuse.svg" height={40} width={100}/>
-        </Link>
-      </header>
-
       <h1 className="text-center text-4xl my-8">
         This is {isTokenOwner ? 'your' : 'a'} Dedicated NFT Song
       </h1>
@@ -84,7 +78,6 @@ export default function Dedication({
           <p>You are not the owner of this Dedicated Song NFT</p>
         ) : null}
       </div>
-      <p></p>
       {account && isTokenOwner && metadata ? (
         <div className="lg:flex p-4">
           <div className="m-auto flex flex-col lg:w-1/3 items-center">

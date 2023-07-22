@@ -5,6 +5,9 @@ import { Inter } from "next/font/google";
 import { AlephTestnet, RococoContractsTestnet, ShibuyaTestnet } from "useink/chains";
 import { DMuseContractProvider } from "@/context";
 import DMuseAudio, { DMuseAudioProvider } from "@/components/DMuseAudio";
+import Link from "next/link";
+import Image from "next/image";
+import Header from "@/components/Header";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,6 +28,7 @@ export default function RootLayout({
           <DMuseContractProvider>
             <DMuseAudioProvider>
               <>
+                <Header />
                 {children}
                 <DMuseAudio />
               </>

@@ -6,12 +6,14 @@ import useMediaQueries from "@/hooks/useMediaQueries";
 import { SongItem } from "@/data/songs";
 import { ReducerActionProps, useDispatchDMuseAudio } from "../DMuseAudio";
 import { Dispatch } from "react";
+import Link from "next/link";
 
 interface SongCardProps {
   song: SongItem;
+  dedicate?: boolean;
 }
 
-const SongCard = ({ song }: SongCardProps) => {
+const SongCard = ({ song, dedicate = true }: SongCardProps) => {
   const { isDesktop } = useMediaQueries()
   const dispatch = useDispatchDMuseAudio() as Dispatch<ReducerActionProps>;
 
@@ -64,8 +66,14 @@ const SongCard = ({ song }: SongCardProps) => {
           <p className="ml-2">300</p>
         </div>
         <div className="flex flex-col items-center">
-          <DedicateButton song={song} />
+          {dedicate ? <DedicateButton song={song} /> : null}
           <ClapButton />
+          {(song.id) ?
+            <Link href={`/dedication/${song.id}`}>
+              See Dedication
+            </Link>
+            : null
+          }
         </div>
       </div>
     </>
