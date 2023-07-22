@@ -1,17 +1,10 @@
 import { SongItem } from '@/data/songs';
 import metadata from '../../target/ink/dmuseminter/dmuseminter.json'
-import { ApiPromise, Keyring, WsProvider } from '@polkadot/api';
-import { ContractPromise } from '@polkadot/api-contract';
 import Image from 'next/image'
 import { useState } from 'react';
 import { useWallet } from 'useink';
-import { BN, stringCamelCase } from '@polkadot/util';
-import { getAbiMessage } from '@/helpers/getAbiMessage';
-// Store your contract's ABI
-const CONTRACT_ABI = metadata;
-// Store contract address
-const CONTRACT_ADDRESS = '5HaaRi9XvrfT1Y1uztJK2vfnLUsJ6P1Q8aF2hGBW17rHoYr6'
-
+import { useDMuseContract } from '@/hooks';
+import Link from 'next/link';
 
 interface ModalProperties {
   isOpen: boolean
@@ -24,8 +17,9 @@ const DedicateModal = ({ isOpen, onClose, song }: ModalProperties) => {
   const [dedicatory, setDedicatory] = useState('')
   const [walletAddress, setWalletAddress] = useState('')
   const [songMetadata, setSongMetadata] = useState<SongItem | undefined>(song)
-  const { account, getWalletBySource } = useWallet();
-  const keyring = new Keyring({ type: 'sr25519' });
+  const { account } = useWallet();
+  const {mint, mintDryRun, dmuse, totalSupply} = useDMuseContract();
+  const [dedicationUrl, setDedicationUrl] = useState<string | undefined>()
 
   if (!isOpen) {
     return null;
@@ -33,7 +27,6 @@ const DedicateModal = ({ isOpen, onClose, song }: ModalProperties) => {
 
   const handleOnClose = () => {
     setDedicatory('')
-    console.log(song)
     setSongMetadata(song)
     setStep(0)
     onClose()
@@ -51,63 +44,28 @@ const DedicateModal = ({ isOpen, onClose, song }: ModalProperties) => {
   }
 
   const handleMint = async () => {
+    setStep(3)
+    const supply = await totalSupply?.send()
+
     const response = await fetch('/api/pin-metadata', {
       method: 'POST',
       body: JSON.stringify(songMetadata)
     })
     const { IpfsHash } = await response.json();
-    const base_uri = `https://gateway.pinata.cloud/ipfs/${IpfsHash}`
-    console.log(base_uri)
+    const base_uri = `https://scarlet-brilliant-roundworm-590.mypinata.cloud/ipfs/${IpfsHash}`
+    mintDryRun?.send([account.address, {u8: 5}, base_uri])
 
-    const wsProvider = new WsProvider("wss://ws.test.azero.dev/");
-    const api = await ApiPromise.create({ provider: wsProvider });
-    const contract = new ContractPromise(api, CONTRACT_ABI, CONTRACT_ADDRESS);
-    // @ts-ignore
-    const maximumBlockWeight = api.consts.system.blockWeights.maxBlock as unknown as WeightV2
-    const maxGas = maximumBlockWeight.refTime.toNumber() * 0.9
-    const gl = api.registry.createType('WeightV2', {
-        refTime: maxGas,
-        proofSize: maxGas,
-    // @ts-ignore
-    }) as WeightV2
-
-    const totalSuppy = await contract.query['psp34::totalSupply'](account.address, { gasLimit: gl })
-    .then((res) => {
-      // @ts-ignore
-      if (!res?.result?.toHuman()?.Err) return res.output.toHuman().Ok;
-    });
-
-    const alice = keyring.addFromUri('//Alice', { name: 'Alice default' });
-
-    const abiMessage = contract.abi.messages.find(
-      (m) => stringCamelCase(m.method) === stringCamelCase('mint'),
-    )
-    const result = await api.call.contractsApi.call(
-      account.address,
-      CONTRACT_ADDRESS,
-      new BN(0),
-      null,
-      null,
-      abiMessage?.toU8a([account.address, {u8: totalSuppy}, base_uri]))
-    const gasLimit = result.gasRequired
-    const mint = await contract.tx.
-                                  mint({ gasLimit }, account.address, {u8: totalSuppy}, base_uri)
-                                  .signAndSend(alice, async ({status, events, dispatchError}) => {
-                                    // status would still be set, but in the case of error we can shortcut
-                                    // to just check it (so an error would indicate InBlock or Finalized)
-                                    if (dispatchError) {
-                                      if (dispatchError.isModule) {
-                                        // for module errors, we have the section indexed, lookup
-                                        const decoded = api.registry.findMetaError(dispatchError.asModule);
-                                        const { docs, name, section } = decoded;
-
-                                        console.log(`${section}.${name}: ${docs.join(' ')}`);
-                                      } else {
-                                        // Other, CannotLookup, BadOrigin, no extra info
-                                        console.log(dispatchError.toString());
-                                      }
-                                    }
-                                  })
+    if(!mintDryRun?.result?.ok){ return }
+    //@ts-ignore
+    mint?.signAndSend([account.address, { u8: parseInt(supply?.value.decoded) }, base_uri], undefined, (result, _api, error) => {
+      if(error){
+        console.error(JSON.stringify(error));
+      }
+      if (!result?.status.isInBlock) return;
+      //@ts-ignore
+      setDedicationUrl(`${process.env.NEXT_PUBLIC_BASE_URL}/dedication/${parseInt(supply?.value.decoded)}`)
+      setStep(4)
+    })
   }
 
   return (
@@ -126,13 +84,13 @@ const DedicateModal = ({ isOpen, onClose, song }: ModalProperties) => {
             <div className='flex justify-center'>
               <Image
                 className="mb-4"
-                src={song.image}
-                alt={song.name}
+                src={song.image as string}
+                alt={song.name as string}
                 width={75}
                 height={75}
               />
               <div className='flex flex-col ml-4 mt-2'>
-                <p className='uppercase text-left'>{song.attributes.find(att => att.trait_type == 'artist')?.value}</p>
+                <p className='uppercase text-left'>{song?.attributes?.find(att => att.trait_type == 'artist')?.value}</p>
                 <p className='text-left'>{song.name}</p>
               </div>
             </div>
@@ -180,7 +138,7 @@ const DedicateModal = ({ isOpen, onClose, song }: ModalProperties) => {
             <h3>The song:</h3>
             <p>{song.name}</p>
             <h3>From artist:</h3>
-            <p>{song.attributes.find(att => att.trait_type === 'artist')?.value}</p>
+            <p>{song?.attributes?.find(att => att.trait_type === 'artist')?.value}</p>
             <h3>Is going to be minted in this wallet:</h3>
             <p>{walletAddress}</p>
             <h3>With this dedicatory</h3>
@@ -195,8 +153,19 @@ const DedicateModal = ({ isOpen, onClose, song }: ModalProperties) => {
         {
           step === 3 ?
             <div className="px-5 py-4 text-white">
+              <h2 className="text-2xl font-bold mb-4">Minting</h2>
+              <h3>Your dedicated song being minted</h3>
+            </div>
+          : null
+        }
+        {
+          step === 4 ?
+            <div className="px-5 py-4 text-white">
             <h2 className="text-2xl font-bold mb-4">Song Dedicated</h2>
-            <h3>The song was sended as an NFT</h3>
+            <h3>The dedicated song was minted as an NFT</h3>
+            <p>Your dedication link is:</p>
+            <br />
+            <Link href={dedicationUrl as string} className="text-yellow-500" >{dedicationUrl}</Link>
             </div>
           : null
         }

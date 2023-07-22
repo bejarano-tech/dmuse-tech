@@ -3,6 +3,7 @@ import { UseInkProvider } from "useink";
 import "./globals.css";
 import { Inter } from "next/font/google";
 import { AlephTestnet, RococoContractsTestnet, ShibuyaTestnet } from "useink/chains";
+import { DMuseContractProvider } from "@/context";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,7 +21,9 @@ export default function RootLayout({
             chains: [AlephTestnet],
           }}
         >
-          {children}
+          <DMuseContractProvider>
+            {children}
+          </DMuseContractProvider>
         </UseInkProvider>
       </body>
     </html>

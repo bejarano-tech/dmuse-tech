@@ -26,8 +26,8 @@ const SongCard = ({ song }: SongCardProps) => {
             }}
           ></button>
           <Image
-            src={song.image}
-            alt={song.name}
+            src={song.image as string}
+            alt={song.name as string}
             className="mx-auto"
             width={256}
             height={256}
