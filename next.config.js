@@ -17,6 +17,11 @@ const nextConfig = {
         hostname: 'gateway.pinata.cloud',
         port: '',
       },
+      {
+        protocol: 'https',
+        hostname: 'scarlet-brilliant-roundworm-590.mypinata.cloud',
+        port: '',
+      },
     ],
   },
 }

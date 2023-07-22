@@ -11,7 +11,7 @@ export default function Home() {
   const { account } = useWallet()
 
   return (
-    <div className="font-sans">
+    <div className="font-sans mb-16">
       <header className="p-4 flex justify-start">
         {/* <button className="bg-yellow-500 text-black font-bold rounded px-4 py-2">Connect Wallet</button> */}
       </header>

@@ -67,8 +67,10 @@ const DedicateModal = ({ isOpen, onClose, song }: ModalProperties) => {
     })
     const { IpfsHash } = await response.json();
     const base_uri = `https://scarlet-brilliant-roundworm-590.mypinata.cloud/ipfs/${IpfsHash}`
-    mintDryRun?.send([walletAddress, {u8: 5}, base_uri])
+    //@ts-ignore
+    mintDryRun?.send([walletAddress, {u8: parseInt(supply?.value.decoded)}, base_uri])
 
+    console.log(mintDryRun)
     if(!mintDryRun?.result?.ok){ return }
     //@ts-ignore
     mint?.signAndSend([walletAddress, { u8: parseInt(supply?.value.decoded) }, base_uri], undefined, (result, _api, error) => {

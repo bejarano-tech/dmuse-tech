@@ -1,0 +1,354 @@
+.dmuse_audio {
+  z-index: 5;
+  position: fixed;
+  bottom: 56px;
+}
+
+@media only screen and (min-width: 600px) {
+  .dmuse_audio {
+    bottom: 0
+  }
+}
+
+.dmuse_audio_container {
+  width: 100vw;
+  float: left;
+}
+
+.dmuse_audio_wrapper {
+  display: flex;
+  justify-content: center;
+  height: 60px;
+  border-radius: 16px 16px 0px 0px;
+  background-color: black;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: rgb(196 193 190 / 24%) 0px -1.7px 47.6px;
+  z-index: 5;
+  padding-left: 0.5rem;
+}
+
+@media (min-width: 300px) {
+  .dmuse_audio_wrapper {
+      display: flex;
+  }
+}
+
+@media (min-width: 480px) {
+  .dmuse_audio_wrapper {
+      grid-template-areas: "avatar controls";
+  }
+}
+
+@media (min-width: 768px) {
+  .dmuse_audio_wrapper {
+      grid-template-areas: "avatar bar controls";
+  }
+}
+
+
+
+
+.dmuse_audio_grid {
+  height: 60px;
+  border-radius: 16px;
+  background-color: transparent;
+  position: relative;
+  margin: 0px;
+  z-index: 4;
+  align-content: center;
+  display: inline-block;
+}
+
+@media (min-width: 300px) {
+  .dmuse_audio_grid {
+      grid-template-areas: "avatar controls";
+      min-width: 20rem;
+      width: 43rem;
+      display: grid;
+      grid-template-columns: 60% 45%;
+      gap: 1rem;
+      padding-left: 0px;
+      padding-right: 3rem;
+  }
+}
+
+@media (min-width: 400px) {
+  .dmuse_audio_grid {
+      grid-template-areas: "avatar controls";
+      min-width: 20rem;
+      width: 43rem;
+      display: grid;
+      grid-template-columns: 65% 38%;
+      gap: 1rem;
+      padding-left: 0px;
+  }
+}
+
+@media (min-width: 768px) {
+  .dmuse_audio_grid {
+      grid-template-areas: "controls bar volume avatar";
+      min-width: 40rem;
+      width: 54rem;
+      display: grid;
+      grid-template-columns: 13% 60% 30%;
+      gap: 1.5rem;
+      padding-left: 2rem;
+      padding-right: 4rem;
+  }
+}
+
+@media (min-width: 1160px) {
+  .dmuse_audio_grid {
+      grid-template-areas: "controls bar volume avatar button";
+      min-width: 60rem;
+      width: 78rem;
+      display: grid;
+      grid-template-columns: 9% 57.5% 2.5% 17% 6%;
+      gap: 1rem;
+      margin-left: 0rem;
+      padding-left: 1rem;
+      padding-right: 1rem;
+  }
+}
+
+.dmuse_audio_controls {
+  z-index: 1;
+  grid-column: 2 / auto;
+  margin-right: 0.5rem;
+}
+
+@media (min-width: 768px) {
+  .dmuse_audio_controls {
+      grid-column: 1 / auto;
+  }
+}
+
+.dmuse_audio_controls_container {
+  grid-area: controls / controls / controls / controls;
+  display: flex;
+  justify-content: space-between;
+}
+
+.dmuse_audio_controls_button {
+  cursor: pointer;
+  padding: 0.7rem 0.5rem 0.5rem;
+  line-height: inherit;
+  color: inherit;
+  background: transparent;
+  border: none;
+}
+
+.dmuse_audio_state_bar {
+  display: none;
+  justify-content: space-between;
+  grid-area: bar / bar / bar / bar;
+  margin-top: 0.8rem;
+}
+
+@media (min-width: 768px) {
+  .dmuse_audio_state_bar {
+      grid-column: 2 / auto;
+      display: flex;
+  }
+}
+
+@media (min-width: 1160px){
+  .dmuse_audio_state_bar {
+      display: flex;
+      grid-column: 2 / auto;
+      padding-left: 0.5rem;
+      padding-right: 1rem;
+  }
+}
+
+.dmuse_audio_state_bar_text {
+  font-size: 0.8rem;
+  margin-top: 0.05rem;
+}
+
+.dmuse_audio_state_bar_progress {
+  height: 4.75px;
+  width: 100%;
+  appearance: none;
+  border-radius: 100px;
+  background: rgb(210, 213, 217);
+  transition: background 0.2s ease 0s;
+  cursor: pointer;
+  overflow: hidden;
+  margin-top: 0.4rem;
+}
+
+
+.dmuse_audio_volume {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+  position: relative;
+  cursor: pointer;
+}
+
+@media (min-width: 300px) {
+  .dmuse_audio_volume {
+      display: none;
+  }
+}
+
+@media (min-width: 1160px) {
+  .dmuse_audio_volume {
+      display: flex;
+      grid-column: 3 / auto;
+  }
+}
+
+.dmuse_audio_volume_icon {
+  padding-bottom: 8px;
+  padding-top: 10px;
+  position: absolute;
+  bottom: -2px;
+}
+
+.dmuse_audio_volume_modal {
+  position: absolute;
+  width: 2.3rem;
+  background-color: white;
+  height: 6.5rem;
+  bottom: 2.4rem;
+  right: 0.2rem;
+  border-radius: 1rem;
+  border-width: 1px;
+  border-style: solid;
+}
+
+.dmuse_audio_volume .dmuse_audio_volume_modal{
+  display: none;
+}
+
+.dmuse_audio_volume_modal_input {
+  appearance: none;
+  border-radius: 100px;
+  background: rgb(210, 213, 217);
+  transition: background 0.2s ease 0s;
+  cursor: pointer;
+  overflow: hidden;
+  transform: rotate(-90deg);
+  height: 4px;
+  width: 70px;
+  position: relative;
+  right: 1.1rem;
+  top: 2.3rem;
+  margin: 0;
+}
+
+.dmuse_audio_info {
+  display: flex;
+  align-items: center;
+  grid-area: avatar / avatar / avatar / avatar;
+  position: relative;
+  width: 100%;
+}
+
+@media (min-width: 300px) {
+  .dmuse_audio_info {
+      grid-column: 1 / auto;
+      position: absolute;
+      left: 1rem;
+      top: 0.2rem;
+  }
+}
+
+@media (min-width: 600px) {
+  .dmuse_audio_info {
+      grid-column: 1 / auto;
+      position: absolute;
+      left: 1rem;
+      top: 0.2rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .dmuse_audio_info {
+      grid-column: 3 / auto;
+      position: absolute;
+      left: 0rem;
+      top: 0.2rem;
+  }
+}
+
+@media (min-width: 1160px) {
+  .dmuse_audio_info {
+      grid-column: 4 / auto;
+      position: absolute;
+      left: 0rem;
+      top: 0.2rem;
+  }
+}
+
+.dmuse_audio_info_image_wrapper {
+  position: relative;
+  cursor: pointer;
+  border-radius: 0.2rem;
+  overflow: hidden;
+  max-width: 42px;
+  max-height: 42px;
+}
+
+.dmuse_audio_info_desc_wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-left: 1rem;
+  height: 40px;
+  margin-top: 0.1rem;
+}
+
+.dmuse_audio_info_desc_wrapper > a {
+  color: var(--colors-grey400);
+  text-transform: uppercase;
+  font-size: 0.77rem;
+}
+
+@media (min-width: 1440px) {
+  .dmuse_audio_info_desc_song_name {
+      font-size: 1.75rem;
+      line-height: 2.5rem;
+  }
+}
+
+.dmuse_audio_info_desc_song_name {
+  font-weight: 500;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden auto;
+  width: 100%;
+  font-size: 0.83rem;
+  line-height: 1.3rem;
+  position: absolute;
+  top: 1.3rem;
+  margin: 0;
+}
+
+@media (min-width: 300px) {
+  .dmuse_audio_info_desc_song_name {
+      width: 30%;
+  }
+}
+
+@media (min-width: 400px) {
+  .dmuse_audio_info_desc_song_name {
+      width: 40%;
+  }
+}
+
+@media (min-width: 768px) {
+  .dmuse_audio_info_desc_song_name {
+      width: 78%;
+  }
+}
+
+@media (min-width: 768px) {
+  .dmuse_audio_info_desc_song_name {
+      font-size: 1.125rem;
+      line-height: 1.5rem;
+  }
+}

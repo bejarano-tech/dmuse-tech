@@ -4,6 +4,8 @@ import DedicateButton from "../DedicateButton";
 import ClapButton from "../ClapButton";
 import useMediaQueries from "@/hooks/useMediaQueries";
 import { SongItem } from "@/data/songs";
+import { ReducerActionProps, useDispatchDMuseAudio } from "../DMuseAudio";
+import { Dispatch } from "react";
 
 interface SongCardProps {
   song: SongItem;
@@ -11,6 +13,25 @@ interface SongCardProps {
 
 const SongCard = ({ song }: SongCardProps) => {
   const { isDesktop } = useMediaQueries()
+  const dispatch = useDispatchDMuseAudio() as Dispatch<ReducerActionProps>;
+
+  const handlePlay = () => {
+    console.log("Handle play")
+    dispatch({
+      type: "PLAY",
+      payload: {
+        playingRelease: {
+          id: 0,
+          artist: song.attributes?.find(({trait_type}) => trait_type === 'artist')?.value as string,
+          image: song.image as string,
+          name: song.name as string,
+          price: 0,
+          tokens_qty: 0,
+          track: song.external_url as string,
+        },
+      },
+    });
+  };
 
   return (
     <>
@@ -20,6 +41,7 @@ const SongCard = ({ song }: SongCardProps) => {
       >
         <div className="relative group">
           <button
+            onClick={handlePlay}
             className={`absolute inset-0 bg-cover bg-center ${!isDesktop ? 'opacity-0 group-hover:opacity-100 transition-opacity' : '' }`}
             style={{
               backgroundImage: `url('/play.svg')`,
@@ -34,7 +56,7 @@ const SongCard = ({ song }: SongCardProps) => {
           />
         </div>
         <p className="mt-4">{song.name}</p>
-        <p className="mb-2">Artist</p>
+        <p className="mb-2">{song.attributes?.find(({trait_type}) => trait_type == 'artist')?.value}</p>
         <div className="mx-auto  p-1 rounded flex justify-center items-center mb-4 w-1/2 border border-white">
           <Image src="/clap-white.svg" alt="claps" width={30} height={30} />
           <p className="ml-2">300</p>
