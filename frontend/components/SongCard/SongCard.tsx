@@ -47,13 +47,15 @@ const SongCard = ({ song }: SongCardProps) => {
               backgroundImage: `url('/play.svg')`,
             }}
           ></button>
-          <Image
-            src={song.image as string}
-            alt={song.name as string}
-            className="mx-auto"
-            width={256}
-            height={256}
-          />
+          <div style={{height: "256px"}}>
+            <Image
+              src={song.image as string}
+              alt={song.name as string}
+              className="mx-auto"
+              width={256}
+              height={256}
+            />
+          </div>
         </div>
         <p className="mt-4">{song.name}</p>
         <p className="mb-2">{song.attributes?.find(({trait_type}) => trait_type == 'artist')?.value}</p>

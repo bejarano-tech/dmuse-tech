@@ -21,6 +21,7 @@ const DedicateModal = ({ isOpen, onClose, song }: ModalProperties) => {
   const {mint, mintDryRun, dmuse, totalSupply} = useDMuseContract();
   const [dedicationUrl, setDedicationUrl] = useState<string | undefined>()
   const [validWalletAddress, setValidWalletAddress] = useState<boolean>(false)
+  const [copied, setCopied] = useState<boolean>(false)
 
   if (!isOpen) {
     return null;
@@ -70,8 +71,9 @@ const DedicateModal = ({ isOpen, onClose, song }: ModalProperties) => {
     //@ts-ignore
     mintDryRun?.send([walletAddress, {u8: parseInt(supply?.value.decoded)}, base_uri])
 
-    console.log(mintDryRun)
-    if(!mintDryRun?.result?.ok){ return }
+    if(!mintDryRun?.result?.ok){ 
+      setStep(3)
+     }
     //@ts-ignore
     mint?.signAndSend([walletAddress, { u8: parseInt(supply?.value.decoded) }, base_uri], undefined, (result, _api, error) => {
       if(error){
@@ -82,6 +84,11 @@ const DedicateModal = ({ isOpen, onClose, song }: ModalProperties) => {
       setDedicationUrl(`${process.env.NEXT_PUBLIC_BASE_URL}/dedication/${parseInt(supply?.value.decoded)}`)
       setStep(4)
     })
+  }
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText(dedicationUrl as string)
+    setCopied(true)
   }
 
   return (
@@ -179,11 +186,21 @@ const DedicateModal = ({ isOpen, onClose, song }: ModalProperties) => {
         {
           step === 4 ?
             <div className="px-5 py-4 text-white">
-            <h2 className="text-2xl font-bold mb-4">Song Dedicated</h2>
-            <h3>The dedicated song was minted as an NFT</h3>
-            <p>Your dedication link is:</p>
-            <br />
-            <Link href={dedicationUrl as string} className="text-yellow-500" >{dedicationUrl}</Link>
+              <h2 className="text-2xl font-bold mb-4">Song Dedicated</h2>
+              <h3>The dedicated song was minted as an NFT</h3>
+              <p>Your dedication link is:</p>
+              <Link href={dedicationUrl as string} className="text-yellow-500" >{dedicationUrl}</Link>
+              <button onClick={() => handleCopy()} className="mt-8 bg-yellow-500 w-full text-black hover:bg-yellow-700 font-bold py-2 px-4 rounded">
+                {copied ? 'Copied' : 'Copy NFT url'}
+              </button>
+            </div>
+          : null
+        },
+        {
+          step === 5 ?
+            <div className="px-5 py-4 text-white">
+              <h2 className="text-2xl font-bold mb-4">Transaction fail</h2>
+              <h3>Try again</h3>
             </div>
           : null
         }
