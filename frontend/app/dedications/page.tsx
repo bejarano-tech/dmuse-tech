@@ -52,13 +52,19 @@ export default function Dedication({}: {}) {
         </div>
         {!account ? <p>Connect your wallet to see your dedications</p> : null}
       </div>
-      {account ? (
+      {(account && !loading)? (
         <div className="lg:flex p-4">
           <div className="grid lg:grid-cols-4 md:grid-cols-2 gap-10 m-auto">
             <SongsList songs={dedications} dedicate={false} />
           </div>
         </div>
       ) : null}
+      { (account && loading)
+        ?
+          <p className="text-center">Loading...</p>
+        :  null
+        
+      }
     </>
   );
 }
