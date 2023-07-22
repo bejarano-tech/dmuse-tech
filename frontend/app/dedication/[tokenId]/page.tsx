@@ -10,6 +10,7 @@ import {
   ReducerActionProps,
   useDispatchDMuseAudio,
 } from "@/components/DMuseAudio";
+import Link from "next/link";
 
 export default function Dedication({
   params,
@@ -63,6 +64,12 @@ export default function Dedication({
 
   return (
     <>
+      <header className="p-4 flex justify-start">
+        <Link href="/">
+          <Image alt='Logo' src="/dmuse.svg" height={40} width={100}/>
+        </Link>
+      </header>
+
       <h1 className="text-center text-4xl my-8">
         This is a Dedicated NFT Song
       </h1>

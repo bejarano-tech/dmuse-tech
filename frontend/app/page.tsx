@@ -42,7 +42,6 @@ export default function Home() {
         </div>
         <div
           className="lg:w-2/3 lg:pr-4 pb-4 lg:pb-0"
-          style={{ maxHeight: "calc(100vh - 4rem)" }}
         >
           <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-10">
             <SongsList songs={songs}/>
