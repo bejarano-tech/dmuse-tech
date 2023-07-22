@@ -1,10 +1,12 @@
 # DMuse Dedicator
 
-![Polkadot Hackathon Logo](polkadot_hackathon_logo.png)
-
 ## Overview
 
 This repository contains a project developed for the Polkadot Global Series Hackathon. The project aims to showcase the integration of Ink! for smart contracts development on the Polkadot network, along with a frontend user interface using Next.js and Tailwind CSS.
+
+## Working example
+
+https://dmuse-ink.vercel.app/
 
 ### Table of Contents
 
