@@ -24,6 +24,9 @@ Before running the project, ensure you have the following prerequisites:
 - Node.js (v14 or later)
 - Yarn package manager
 - Polkadot Extension for your browser
+- Rust & Cargo: [Installation](https://doc.rust-lang.org/cargo/getting-started/installation.html)
+- Cargo Contract: [Installation](https://github.com/paritytech/cargo-contract#installation)
+- substrate-contracts-node: [Installation](https://github.com/paritytech/substrate-contracts-node)
 
 ## Installation
 
@@ -37,16 +40,13 @@ cd dmuse
 2. Install the dependencies for both the smart contracts and the frontend:
 
 ```bash
-cd smart-contracts
-yarn install
-
 cd ../frontend
 yarn install
 ```
 
 ## Smart Contracts
 
-In this project, we are using the Ink! smart contract language for developing smart contracts for the Polkadot network. The smart contract code can be found in the `smart-contracts` directory.
+In this project, we are using the Ink! smart contract language for developing smart contracts for the Polkadot network. The smart contract code can be found in the `contracts` directory.
 
 ## Frontend
 
@@ -59,11 +59,11 @@ The frontend of the application is built using Next.js for React-based server-si
 1. Compile the Ink! smart contract:
 
 ```bash
-cd smart-contracts
-yarn build
+cd contracts/dmuseminter
+cargo +nightly-2023-01-01 contract build --release
 ```
 
-2. Deploy the compiled smart contract to the Polkadot network. You can use the Polkadot JS API or the Polkadot UI Extension to deploy the contract.
+2. Deploy the compiled smart contract to the Polkadot network. You can use the [Contracts UI](https://contracts-ui.substrate.io/).
 
 ### 2. Frontend Development
 
@@ -74,7 +74,13 @@ cd frontend
 yarn dev
 ```
 
-2. Access the application by visiting `http://localhost:3000` in your web browser.
+2. Set const CONTRACT_ADDRESS to the address of your deployed contract.
+
+3. Access the application by visiting `http://localhost:3000` in your web browser.
+
+### 3. Notes
+
+1. The front end connects to the Aleph Zero Tesnet
 
 ## Contributing
 

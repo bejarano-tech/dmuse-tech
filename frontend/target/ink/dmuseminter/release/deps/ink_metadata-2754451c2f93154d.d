@@ -1,0 +1,11 @@
+/Users/fredbs/DApps/dmuse/target/ink/dmuseminter/release/deps/ink_metadata-2754451c2f93154d.rmeta: /Users/fredbs/.cargo/registry/src/github.com-1ecc6299db9ec823/ink_metadata-4.0.1/src/lib.rs /Users/fredbs/.cargo/registry/src/github.com-1ecc6299db9ec823/ink_metadata-4.0.1/src/layout/mod.rs /Users/fredbs/.cargo/registry/src/github.com-1ecc6299db9ec823/ink_metadata-4.0.1/src/layout/validate.rs /Users/fredbs/.cargo/registry/src/github.com-1ecc6299db9ec823/ink_metadata-4.0.1/src/specs.rs /Users/fredbs/.cargo/registry/src/github.com-1ecc6299db9ec823/ink_metadata-4.0.1/src/utils.rs
+
+/Users/fredbs/DApps/dmuse/target/ink/dmuseminter/release/deps/libink_metadata-2754451c2f93154d.rlib: /Users/fredbs/.cargo/registry/src/github.com-1ecc6299db9ec823/ink_metadata-4.0.1/src/lib.rs /Users/fredbs/.cargo/registry/src/github.com-1ecc6299db9ec823/ink_metadata-4.0.1/src/layout/mod.rs /Users/fredbs/.cargo/registry/src/github.com-1ecc6299db9ec823/ink_metadata-4.0.1/src/layout/validate.rs /Users/fredbs/.cargo/registry/src/github.com-1ecc6299db9ec823/ink_metadata-4.0.1/src/specs.rs /Users/fredbs/.cargo/registry/src/github.com-1ecc6299db9ec823/ink_metadata-4.0.1/src/utils.rs
+
+/Users/fredbs/DApps/dmuse/target/ink/dmuseminter/release/deps/ink_metadata-2754451c2f93154d.d: /Users/fredbs/.cargo/registry/src/github.com-1ecc6299db9ec823/ink_metadata-4.0.1/src/lib.rs /Users/fredbs/.cargo/registry/src/github.com-1ecc6299db9ec823/ink_metadata-4.0.1/src/layout/mod.rs /Users/fredbs/.cargo/registry/src/github.com-1ecc6299db9ec823/ink_metadata-4.0.1/src/layout/validate.rs /Users/fredbs/.cargo/registry/src/github.com-1ecc6299db9ec823/ink_metadata-4.0.1/src/specs.rs /Users/fredbs/.cargo/registry/src/github.com-1ecc6299db9ec823/ink_metadata-4.0.1/src/utils.rs
+
+/Users/fredbs/.cargo/registry/src/github.com-1ecc6299db9ec823/ink_metadata-4.0.1/src/lib.rs:
+/Users/fredbs/.cargo/registry/src/github.com-1ecc6299db9ec823/ink_metadata-4.0.1/src/layout/mod.rs:
+/Users/fredbs/.cargo/registry/src/github.com-1ecc6299db9ec823/ink_metadata-4.0.1/src/layout/validate.rs:
+/Users/fredbs/.cargo/registry/src/github.com-1ecc6299db9ec823/ink_metadata-4.0.1/src/specs.rs:
+/Users/fredbs/.cargo/registry/src/github.com-1ecc6299db9ec823/ink_metadata-4.0.1/src/utils.rs:

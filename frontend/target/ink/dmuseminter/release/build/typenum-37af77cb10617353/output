@@ -1,0 +1,3 @@
+cargo:rerun-if-changed=build/main.rs
+cargo:rustc-env=TYPENUM_BUILD_CONSTS=/Users/fredbs/DApps/dmuse/target/ink/dmuseminter/release/build/typenum-37af77cb10617353/out/consts.rs
+cargo:rustc-env=TYPENUM_BUILD_OP=/Users/fredbs/DApps/dmuse/target/ink/dmuseminter/release/build/typenum-37af77cb10617353/out/op.rs
