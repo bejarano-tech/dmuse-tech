@@ -71,7 +71,7 @@ export default function Dedication({
       </header>
 
       <h1 className="text-center text-4xl my-8">
-        This is a Dedicated NFT Song
+        This is {isTokenOwner ? 'your' : 'a'} Dedicated NFT Song
       </h1>
       <div className="flex items-center justify-center flex-col">
         <div className="mb-8">
