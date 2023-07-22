@@ -1,1 +1,0 @@
-/Users/fredbs/DApps/dmuse/target/ink/dmuseminter/release/metadata-gen: /Users/fredbs/DApps/dmuse/contracts/dmuseminter/lib.rs /private/var/folders/9p/tpy3b1v57yjdz6whjhl18s3w0000gn/T/cargo-contract_3QF4hr/contracts/dmuseminter/.ink/metadata_gen/main.rs

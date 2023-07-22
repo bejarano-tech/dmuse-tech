@@ -1,1 +1,0 @@
-"pub trait PSP22Capped\n{\n    #[doc = \" Returns the token\\'s cap\"] #[ink(message)]\n    #[ink(selector = 4093863604u32)] fn cap(& self) -> Balance ;\n}"
