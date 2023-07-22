@@ -4,6 +4,23 @@
 
 This repository contains a project developed for the Polkadot Global Series Hackathon. The project aims to showcase the integration of Ink! for smart contracts development on the Polkadot network, along with a frontend user interface using Next.js and Tailwind CSS.
 
+
+## What is the DMuse Dedicator?
+
+DMuse dedicator is a platform to give NFT Dedicated Songs that saves in the blockchain a dedication within the song NFT.
+
+## How it works?
+
+https://youtu.be/8etm0xLF6f0
+
+- First you connect your wallet.
+- Second you select the song to dedicated.
+- Then you write your dedication.
+- Later you write your honoree wallet (Wallet of your fellow)
+- Then you confirm your dedication is correct
+- Mint the dedication song NFT
+- Once minted you can share the URL with your honoree wich is the only one that can see the NFT with the dedication.
+
 ## Working example
 
 https://dmuse-ink.vercel.app/
