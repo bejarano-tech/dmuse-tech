@@ -63,6 +63,8 @@ cd contracts/dmuseminter
 cargo +nightly-2023-01-01 contract build --release
 ```
 
+After build copy /target/ink/dmuseminter/dmuseminter.json to frontend directory
+
 2. Deploy the compiled smart contract to the Polkadot network. You can use the [Contracts UI](https://contracts-ui.substrate.io/).
 
 ### 2. Frontend Development
@@ -81,6 +83,10 @@ yarn dev
 ### 3. Notes
 
 1. The front end connects to the Aleph Zero Tesnet
+
+2. Deployed Contracts:
+  
+  - Aleph Zero Testnet: 5HB4vskWTb1Bho3kdiQcaMsSfDskUC5DrTViMHpBujmJ2GKM 
 
 ## Contributing
 
