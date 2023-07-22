@@ -59,7 +59,7 @@ cd dmuse-tech
 2. Install the dependencies for both the smart contracts and the frontend:
 
 ```bash
-cd ../frontend
+cd frontend
 yarn install
 ```
 
@@ -82,20 +82,41 @@ cd contracts/dmuseminter
 cargo +nightly-2023-01-01 contract build --release
 ```
 
-After build copy /target/ink/dmuseminter/dmuseminter.json to frontend directory
+    After build copy /target/ink/dmuseminter/dmuseminter.json to frontend directory
 
 2. Deploy the compiled smart contract to the Polkadot network. You can use the [Contracts UI](https://contracts-ui.substrate.io/).
 
 ### 2. Frontend Development
 
-1. Start the frontend development server:
+1. Enter directory:
 
 ```bash
 cd frontend
+```
+
+2. Copy .env.example to .env
+
+```bash
+cp .env.example .env
+```
+
+3. Fill The values of the .env with your credentials
+
+```bash
+PINATA_API_KEY=
+PINATA_API_SECRET=
+PINATA_API_JWT=
+NEXT_PUBLIC_BASE_URL=http://localhost:3000
+```
+
+3. Start development front end server
+
+```bash
 yarn dev
 ```
 
-2. Set const CONTRACT_ADDRESS to the address of your deployed contract.
+
+
 
 3. Access the application by visiting `http://localhost:3000` in your web browser.
 
