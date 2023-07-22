@@ -1,9 +1,10 @@
 import { SongItem } from '@/data/songs';
 import Image from 'next/image'
-import { useState } from 'react';
+import { SetStateAction, useState } from 'react';
 import { useWallet } from 'useink';
 import { useDMuseContract } from '@/hooks';
 import Link from 'next/link';
+import WAValidator from 'multicoin-address-validator';
 
 interface ModalProperties {
   isOpen: boolean
@@ -19,12 +20,14 @@ const DedicateModal = ({ isOpen, onClose, song }: ModalProperties) => {
   const { account } = useWallet();
   const {mint, mintDryRun, dmuse, totalSupply} = useDMuseContract();
   const [dedicationUrl, setDedicationUrl] = useState<string | undefined>()
+  const [validWalletAddress, setValidWalletAddress] = useState<boolean>(false)
 
   if (!isOpen) {
     return null;
   }
 
   const handleOnClose = () => {
+    setValidWalletAddress(false)
     setDedicatory('')
     setSongMetadata(song)
     setStep(0)
@@ -38,8 +41,20 @@ const DedicateModal = ({ isOpen, onClose, song }: ModalProperties) => {
     setStep(1)
   }
 
-  const handleSetWalletAddress = () => {
-    setStep(2)
+  const handleSetWalletAddress = (e: { preventDefault: () => void; }) => {
+    e.preventDefault();
+    if(validWalletAddress){
+      setStep(2)
+      console.log('This is a valid address');}
+    else {
+      console.log('Address INVALID');
+    }
+  }
+
+  const handleWalletAddressOnChange = (event: { target: { value: SetStateAction<string>; }; }) => {
+    setWalletAddress(event.target.value)
+    const valid = WAValidator.validate(event.target.value as string, 'dot', 'testnet');
+    setValidWalletAddress(valid)
   }
 
   const handleMint = async () => {
@@ -69,7 +84,7 @@ const DedicateModal = ({ isOpen, onClose, song }: ModalProperties) => {
 
   return (
     <div className="fixed inset-0 z-50 overflow-auto bg-smoke-light flex">
-      <div className="relative p-6 bg-black border border-white w-full max-w-md m-auto flex-col flex rounded">
+      <div className="relative p-6 bg-black border border-white w-full max-w-lg m-auto flex-col flex rounded">
         <span
           className="absolute top-0 right-0 p-4 cursor-pointer text-white"
           onClick={handleOnClose}
@@ -117,12 +132,14 @@ const DedicateModal = ({ isOpen, onClose, song }: ModalProperties) => {
             <form onSubmit={handleSetWalletAddress}>
               <input
                 required
-                onChange={(event) => setWalletAddress(event.target.value)}
-                className="border rounded w-full py-2 px-3 text-black mb-4"
+                onChange={handleWalletAddressOnChange}
+                className="border rounded w-full py-2 px-3 text-black"
                 name="name"
+                autoComplete='off'
                 placeholder="Wallet Address of your fellow"
               />
-              <p className="mb-4 text-white">This will ensure that the honoree is going to know about your dedication.</p>
+              {(walletAddress.length > 0) && !validWalletAddress ? <p className='text-red-500 mb-4'>Invalid wallet address</p> :  null}
+              <p className="mb-4 text-white mt-8">Enter the wallet address you want send a Dedicated Song NFT.</p>
               <button type='submit' className="bg-yellow-500 w-full text-black hover:bg-yellow-700 font-bold py-2 px-4 rounded">
                 Next
               </button>

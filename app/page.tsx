@@ -1,11 +1,15 @@
+"use client";
 import ClapButton from '@/components/ClapButton';
 import DedicateButton from '@/components/DedicateButton';
 import SongsList from '@/components/SongsList';
 import WalletConnection from '@/components/WalletConnection';
 import Image from 'next/image'
 import { songs } from '@/data/songs'
+import { useWallet } from 'useink';
 
 export default function Home() {
+  const { account } = useWallet()
+
   return (
     <div className="font-sans">
       <header className="p-4 flex justify-start">
@@ -29,9 +33,10 @@ export default function Home() {
             <div className="mb-16">
               <WalletConnection />
             </div>
-            <p className="text-sm">
+            { !account ? 
+              <p className="text-sm">
               Connect your wallet to dedicate a NFT Song
-            </p>
+            </p>: null }
             {/* <p className="text-sm">Example text...</p> */}
           </div>
         </div>
