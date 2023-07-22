@@ -1,5 +1,4 @@
 import { SongItem } from '@/data/songs';
-import metadata from '../../target/ink/dmuseminter/dmuseminter.json'
 import Image from 'next/image'
 import { useState } from 'react';
 import { useWallet } from 'useink';

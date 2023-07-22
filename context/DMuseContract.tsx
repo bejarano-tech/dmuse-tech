@@ -1,7 +1,7 @@
 import { PropsWithChildren, createContext } from "react";
 import { useContract, DryRun, useDryRun, useTx, Tx, useCall, Call, ChainContract } from "useink";
 import { CONTRACT_ADDRESS } from "../const";
-import metadata from "../target/ink/dmuseminter/dmuseminter.json";
+import metadata from "../dmuseminter.json";
 import { MintingResult, TotalSupplyResult } from "../types";
 import { useTxNotifications } from "useink/notifications";
 
